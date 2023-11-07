@@ -2,7 +2,7 @@ import pandas as pd
 
 # Cargar el archivo CSV
 # Especifica la codificación al abrir el archivo CSV
-df = pd.read_csv('madrid.csv', sep=';', encoding='ISO-8859-1')
+df = pd.read_csv('archivo.csv', sep=';', encoding='ISO-8859-1')
 
 # Limpieza de datos: Elimina las columnas que no son necesarias
 columns_to_drop = ['PRECIO', 'GRATUITO', 'LARGA-DURACION', 'DIAS-SEMANA', 'DIAS-EXCLUIDOS', 'HORA', 'CONTENT-URL', 'TITULO-ACTIVIDAD', 'URL-ACTIVIDAD', 'URL-INSTALACION', 'NOMBRE-INSTALACION', 'ACCESIBILIDAD-INSTALACION', 'CLASE-VIAL-INSTALACION', 'NOMBRE-VIA-INSTALACION', 'NUM-INSTALACION', 'DISTRITO-INSTALACION', 'BARRIO-INSTALACION', 'CODIGO-POSTAL-INSTALACION', 'COORDENADA-X', 'COORDENADA-Y', 'LATITUD', 'LONGITUD']
