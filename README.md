@@ -1,6 +1,6 @@
 # Patrones-Creacionales
 
-Ejercicio 1: Análisis Modular de las Activaciones del SAMUR-Protección Civil en Madrid con Abstract Factory
+## Ejercicio 1: Análisis Modular de las Activaciones del SAMUR-Protección Civil en Madrid con Abstract Factory
 
 Contexto:
 
@@ -12,38 +12,38 @@ Objetivo:
 
 Tu tarea es desarrollar un programa en Python que haga uso del patrón de diseño "Abstract Factory" para modularizar y estandarizar el análisis de estos datos. En específico:
 
-Lectura de Datos: Acceda y lea el archivo CSV directamente desde el enlace proporcionado: Activaciones del SAMUR-Protección Civil. A continuación, te dejo un código que realiza la lectura del archivo CSV:
-import pandas as pd
+1. Lectura de Datos: Acceda y lea el archivo CSV directamente desde el enlace proporcionado: Activaciones del SAMUR-Protección Civil. A continuación, te dejo un código que realiza la lectura del archivo CSV:
 
- 
+````
+
+import pandas as pd
 
 URL = "https://datos.madrid.es/egob/catalogo/212504-0-emergencias-activaciones.csv"
 
- 
-
-# Leer CSV desde la URL
+#Leer CSV desde la URL
 
 data = pd.read_csv(URL, sep=';', encoding='ISO-8859-1')
 
- 
+print(data.head())  #Mostrar las primeras filas para visualizar los datos
 
-print(data.head())  # Mostrar las primeras filas para visualizar los datos
+````
 
- 
+2. Modelado de Datos: Modela y estructura la información para su análisis.
 
-Modelado de Datos: Modela y estructura la información para su análisis.
-Abstract Factory: Diseña un "Abstract Factory" que permita crear diferentes tipos de análisis o representaciones de los datos. Por ejemplo:
-Una fábrica que genere análisis estadísticos (media, moda, mediana).
-Una fábrica que produzca visualizaciones gráficas (histogramas, gráficos de barras).
-Cada fábrica debe tener al menos dos productos concretos (e.g., histograma de activaciones por tipo de emergencia, gráfico de barras de activaciones por mes).
+3. Abstract Factory:
+   * Diseña un "Abstract Factory" que permita crear diferentes tipos de análisis o representaciones de los datos. Por ejemplo:
+   * Una fábrica que genere análisis estadísticos (media, moda, mediana).
+   * Una fábrica que produzca visualizaciones gráficas (histogramas, gráficos de barras).
+   * Cada fábrica debe tener al menos dos productos concretos (e.g., histograma de activaciones por tipo de emergencia, gráfico de barras de activaciones por mes).
 
-Análisis y Representación: Utiliza las fábricas creadas para generar distintos análisis y representaciones de los datos. Muestra la media de activaciones por día, y un histograma de las activaciones
+4. Análisis y Representación: Utiliza las fábricas creadas para generar distintos análisis y representaciones de los datos. Muestra la media de activaciones por día, y un histograma de las activaciones
+
 Recomendaciones:
 
 El objetivo principal es demostrar una correcta implementación y uso del patrón "Abstract Factory". Asegúrate de definir claramente las interfaces (productos abstractos) y las implementaciones concretas (productos concretos).
 Utiliza pandas para la manipulación de datos y, si decides incluir visualizaciones, considera matplotlib o seaborn.
 
-Rúbrica:
+#### Rúbrica:
 
 Comprensión del Patrón Abstract Factory: Demuestra una completa comprensión del patrón, implementando correctamente las factories abstractas y concretas.
 
