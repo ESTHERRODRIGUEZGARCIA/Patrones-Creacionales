@@ -1,45 +1,45 @@
 from abc import ABC, abstractmethod
 
 # Fábrica abstracta para análisis
-class AnalysisFactory(ABC):
+class FabricaAnalisis(ABC):
     @abstractmethod
-    def create_statistical_analysis(self):
+    def crear_analisis_estadistico(self):
         pass
 
     @abstractmethod
-    def create_custom_analysis(self):
+    def crear_analisis_personalizado(self):
         pass
 
 # Fábrica abstracta para visualización
-class VisualizationFactory(ABC):
+class FabricaVisualizacion(ABC):
     @abstractmethod
-    def create_histogram(self):
+    def crear_histograma(self):
         pass
 
     @abstractmethod
-    def create_bar_chart(self):
+    def crear_grafico_de_barras(self):
         pass
 
 # Producto abstracto para análisis estadístico
-class StatisticalAnalysis(ABC):
+class AnalisisEstadistico(ABC):
     @abstractmethod
-    def perform_analysis(self, data):
+    def realizar_analisis(self, datos):
         pass
 
 # Producto abstracto para análisis personalizado
-class CustomAnalysis(ABC):
+class AnalisisPersonalizado(ABC):
     @abstractmethod
-    def perform_custom_analysis(self, data):
+    def realizar_analisis_personalizado(self, datos):
         pass
 
 # Producto abstracto para histograma
-class Histogram(ABC):
+class Histograma(ABC):
     @abstractmethod
-    def generate_histogram(self, data):
+    def generar_histograma(self, datos):
         pass
 
 # Producto abstracto para gráfico de barras
-class BarChart(ABC):
+class GraficoDeBarras(ABC):
     @abstractmethod
-    def generate_bar_chart(self, data):
+    def generar_grafico_de_barras(self, datos):
         pass
