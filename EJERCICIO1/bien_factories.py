@@ -14,17 +14,21 @@ class AbstractFactory(ABC):
 
 # Fábrica concreta 1
 class FabricaConcreta1(AbstractFactory):
+    # Método para crear un producto de análisis de datos
     def crear_analisis_de_datos(self):
         return ConcreteProductA1()
 
+    # Método para crear un producto de visualización de datos
     def crear_visualizacion_de_datos(self):
         return ConcreteProductB1()
 
 # Fábrica concreta 2
 class FabricaConcreta2(AbstractFactory):
+    # Método para crear un producto de análisis de datos
     def crear_analisis_de_datos(self):
         return ConcreteProductA2()
 
+    # Método para crear un producto de visualización de datos
     def crear_visualizacion_de_datos(self):
         return ConcreteProductB2()
 
