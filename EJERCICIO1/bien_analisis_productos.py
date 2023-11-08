@@ -1,5 +1,4 @@
 from bien_factories import AbstractFactory
-
 from abc import ABC, abstractmethod
 import pandas as pd
 

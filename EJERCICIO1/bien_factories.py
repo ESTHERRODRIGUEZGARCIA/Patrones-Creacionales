@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from bien_analisis_productos import ConcreteProductA1, ConcreteProductA2
+from bien_visualizacion_productos import ConcreteProductB1, ConcreteProductB2
 
 # Clase abstracta para la fábrica
 class AbstractFactory(ABC):
@@ -13,12 +15,10 @@ class AbstractFactory(ABC):
 # Fábrica concreta 1
 class FabricaConcreta1(AbstractFactory):
     def crear_analisis_de_datos(self):
-        pass
-        #return ConcreteProductA1()
+        return ConcreteProductA1()
 
     def crear_visualizacion_de_datos(self):
-        pass
-        #return ConcreteProductB1()
+        return ConcreteProductB1()
 
 # Fábrica concreta 2
 class FabricaConcreta2(AbstractFactory):
