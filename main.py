@@ -4,6 +4,9 @@
 # y la personalización. 
 # SOLID: cada clase o módulo tenga una sola razón para cambia
 
+
+import sys
+import os
 import time
 import csv
 from builders.pizza_builder import PizzaBuilder
@@ -18,6 +21,12 @@ def display_pizza_menu(menu):
     for i, pizza in enumerate(menu, 1):
         print(f"{i}. {pizza.name} - {pizza.category}")
     print("0. Salir")
+
+# Obtener la ruta del directorio actual
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Agregar el directorio raíz a sys.path
+sys.path.append(current_directory)
 
 def main():
     # Cargar el menú de pizzas desde el archivo CSV
