@@ -15,11 +15,11 @@ def client_code(bien_factory):
     product_a = bien_factory.crear_analisis_de_datos()
     product_b = bien_factory.crear_visualizacion_de_datos()
 
-    print("Producto A (Análisis de Datos):")
+    ''''print("Producto A (Análisis de Datos):")
     product_a.realizar_analisis(datos)
 
     print("Producto B (Visualización de Datos):")
-    product_b.generar_visualizacion(datos)
+    product_b.generar_visualizacion(datos)''''
 
 if __name__ == "__main__":
     datos = cargar_datos_desde_csv("EJERCICIO1/CSV/archivo_limpio.csv")
