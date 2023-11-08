@@ -15,18 +15,22 @@ class ConcreteProductA1(AbstractProductA):
         # Agrupar los eventos por categoría y contar cuántos hay por cada mes.
         results = defaultdict(int)
         for evento in datos:
-            fecha = pd.to_datetime(evento["FECHA"])
             categoria = evento["TIPO"]
-            # Realizar análisis estadístico aquí.
             results[categoria] += 1
 
         return dict(results)
 
+        # para el main: resultado = agrupar_eventos_por_categoria(datos)
+                        #print(resultado)
+
 # Producto de análisis concreto A2
 class ConcreteProductA2(AbstractProductA):
     def realizar_analisis(self, datos):
-        def realizar_analisis(self, datos):
-        # Agrupar los eventos por fecha (distribución de eventos por fecha).
-        fechas = [pd.to_datetime(evento["FECHA"]) for evento in datos]
-        # Realizar análisis personalizado aquí.
-        return fechas
+        results = defaultdict(int)
+        for evento in datos:
+            fecha = pd.to_datetime(evento["FECHA"]).strftime("%Y-%m-%d")
+            results[fecha] += 1
+
+        return dict(results)
+        #resultado = agrupar_eventos_por_fecha(datos)
+        #print(resultado)

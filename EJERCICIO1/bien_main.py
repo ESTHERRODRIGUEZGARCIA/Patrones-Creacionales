@@ -1,6 +1,6 @@
 from bien_factories import FabricaConcreta1, FabricaConcreta2
 from bien_analisis_productos import ConcreteProductA1, ConcreteProductA2
-from bien_analisis_productos import ConcreteProductB1, ConcreteProductB2
+from bien_visualizacion_productos import ConcreteProductB1, ConcreteProductB2
 import csv
 
 def cargar_datos_desde_csv(ruta_csv):
@@ -11,9 +11,9 @@ def cargar_datos_desde_csv(ruta_csv):
             datos.append(fila)
     return datos
 
-def client_code(factory):
-    product_a = factory.crear_analisis_de_datos()
-    product_b = factory.crear_visualizacion_de_datos()
+def client_code(bien_factory):
+    product_a = bien_factory.crear_analisis_de_datos()
+    product_b = bien_factory.crear_visualizacion_de_datos()
 
     print("Producto A (Análisis de Datos):")
     product_a.realizar_analisis(datos)
