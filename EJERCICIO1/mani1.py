@@ -1,9 +1,11 @@
+####
 from abc import ABC, abstractmethod
+####
 import csv
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import pandas as pd
-
+####
 class AbstractFactory(ABC):
     @abstractmethod
     def crear_analisis_de_datos(self):
@@ -27,6 +29,8 @@ class FabricaConcreta2(AbstractFactory):
     def crear_visualizacion_de_datos(self):
         return ConcreteProductB2()
 
+####
+####bien-analisis-productos
 class AbstractProductA(ABC):
     @abstractmethod
     def realizar_analisis(self, datos):
@@ -46,6 +50,8 @@ class ConcreteProductA1(AbstractProductA):
 class ConcreteProductA2(AbstractProductA):
     def realizar_analisis(self, datos):
         print("Análisis personalizado")
+
+#### fin bien-analisis-productos
 
 class AbstractProductB(ABC):
     @abstractmethod
@@ -73,6 +79,9 @@ class ConcreteProductB2(AbstractProductB):
         plt.title("Cantidad de Eventos por Categoría")
         plt.show()
 
+#### fin bien-visualizacion-productos
+
+#### aqui es el main 
 def cargar_datos_desde_csv(ruta_csv):
     datos = []
     with open(ruta_csv, "r") as archivo_csv:
