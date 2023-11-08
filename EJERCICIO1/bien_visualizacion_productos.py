@@ -1,5 +1,7 @@
-from bien_factories import AbstractFactory
 from abc import ABC, abstractmethod
+import matplotlib.pyplot as plt
+import pandas as pd
+from bien_factories import AbstractFactory
 
 # Clase abstracta para productos de visualización
 class AbstractProductB(ABC):

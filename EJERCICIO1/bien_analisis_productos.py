@@ -1,6 +1,7 @@
-from bien_factories import AbstractFactory
+from collections import defaultdict
 from abc import ABC, abstractmethod
 import pandas as pd
+from bien_factories import AbstractFactory
 
 # Clase abstracta para productos de análisis
 class AbstractProductA(ABC):
@@ -11,7 +12,7 @@ class AbstractProductA(ABC):
 # Producto de análisis concreto A1
 class ConcreteProductA1(AbstractProductA):
     def realizar_analisis(self, datos):
-        # Agrupar los eventos por categoría y contar cuántos hay por cada mes.
+        # Agrupar los eventos por categoría
         results = defaultdict(int)
         for evento in datos:
             categoria = evento["TIPO"]
