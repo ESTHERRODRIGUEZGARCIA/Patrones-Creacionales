@@ -20,8 +20,6 @@ class ConcreteProductA1(AbstractProductA):
 
         return dict(results)
 
-        # para el main: resultado = agrupar_eventos_por_categoria(datos)
-                        #print(resultado)
 
 # Producto de análisis concreto A2
 class ConcreteProductA2(AbstractProductA):

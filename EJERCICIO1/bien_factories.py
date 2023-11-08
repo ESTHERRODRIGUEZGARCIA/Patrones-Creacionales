@@ -13,7 +13,8 @@ class AbstractFactory(ABC):
 # Fábrica concreta 1
 class FabricaConcreta1(AbstractFactory):
     def crear_analisis_de_datos(self):
-        return ConcreteProductA1()
+        resultado = realizar_analisis(datos)
+        print(resultado)
 
     def crear_visualizacion_de_datos(self):
         return ConcreteProductB1()
