@@ -1,7 +1,6 @@
 from collections import defaultdict
 import pandas as pd
-from bien_factories import AbstractFactory
-from bien_factories import cargar_datos_desde_csv
+from abc import ABC, abstractmethod
 
 # Clase abstracta para productos de análisis
 class AbstractProductA(ABC):

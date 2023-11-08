@@ -1,4 +1,6 @@
-from bien_factories import FabricaConcreta1, FabricaConcreta2
+from bien_factories import FabricaConcreta1, FabricaConcreta2, AbstractFactory
+from bien_analisis_productos import ConcreteProductA1, ConcreteProductA2
+from bien_visualizacion_productos import ConcreteProductB1, ConcreteProductB2
 import csv
 
 def cargar_datos_desde_csv(ruta_csv):
