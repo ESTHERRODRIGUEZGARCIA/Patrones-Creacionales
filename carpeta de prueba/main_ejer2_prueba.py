@@ -5,8 +5,8 @@ from typing import Any
 
 class Builder(ABC):
     """
-    The Builder interface specifies methods for creating the different parts of
-    the Product objects.
+    La interfaz Builder especifica métodos para crear las diferentes partes de
+    los objetos del Producto.
     """
 
     @property
@@ -29,15 +29,15 @@ class Builder(ABC):
 
 class ConcreteBuilder1(Builder):
     """
-    The Concrete Builder classes follow the Builder interface and provide
-    specific implementations of the building steps. Your program may have
-    several variations of Builders, implemented differently.
+    Las clases de Concrete Builder siguen la interfaz de Builder y proporcionan
+    Implementaciones específicas de los pasos de construcción. Su programa puede tener
+    Varias variaciones de Builders, implementadas de manera diferente.
     """
 
     def __init__(self) -> None:
         """
-        A fresh builder instance should contain a blank product object, which is
-        used in further assembly.
+        Una nueva instancia de constructor debe contener un objeto de producto en blanco, que es
+        utilizado en montaje posterior.
         """
         self.reset()
 
@@ -47,18 +47,18 @@ class ConcreteBuilder1(Builder):
     @property
     def product(self) -> Product1:
         """
-        Concrete Builders are supposed to provide their own methods for
-        retrieving results. That's because various types of builders may create
-        entirely different products that don't follow the same interface.
-        Therefore, such methods cannot be declared in the base Builder interface
-        (at least in a statically typed programming language).
+        Se supone que los constructores Concrete deben proporcionar sus propios métodos para
+        recuperando resultados. Esto se debe a que varios tipos de constructores pueden crear
+        productos completamente diferentes que no siguen la misma interfaz.
+        Por lo tanto, dichos métodos no se pueden declarar en la interfaz base del Constructor.
+        (al menos en un lenguaje de programación de tipo estático).
 
-        Usually, after returning the end result to the client, a builder
-        instance is expected to be ready to start producing another product.
-        That's why it's a usual practice to call the reset method at the end of
-        the `getProduct` method body. However, this behavior is not mandatory,
-        and you can make your builders wait for an explicit reset call from the
-        client code before disposing of the previous result.
+        Generalmente, después de devolver el resultado final al cliente, un constructor
+        Se espera que la instancia esté lista para comenzar a producir otro producto.
+        Por eso es una práctica habitual llamar al método reset al final de
+        el cuerpo del método `getProduct`. Sin embargo, este comportamiento no es obligatorio,
+        y puede hacer que sus constructores esperen una llamada de reinicio explícita desde el
+        código de cliente antes de deshacerse del resultado anterior.
         """
         product = self._product
         self.reset()
@@ -76,12 +76,12 @@ class ConcreteBuilder1(Builder):
 
 class Product1():
     """
-    It makes sense to use the Builder pattern only when your products are quite
-    complex and require extensive configuration.
+    Tiene sentido utilizar el patrón Builder sólo cuando sus productos sean bastante
+    complejos y requieren una configuración extensa.
 
-    Unlike in other creational patterns, different concrete builders can produce
-    unrelated products. In other words, results of various builders may not
-    always follow the same interface.
+    A diferencia de otros patrones creacionales, diferentes constructores concretos pueden producir
+    productos no relacionados. En otras palabras, es posible que los resultados de varios constructores no
+    Sigue siempre la misma interfaz.
     """
 
     def __init__(self) -> None:
@@ -96,10 +96,10 @@ class Product1():
 
 class Director:
     """
-    The Director is only responsible for executing the building steps in a
-    particular sequence. It is helpful when producing products according to a
-    specific order or configuration. Strictly speaking, the Director class is
-    optional, since the client can control builders directly.
+    El Director sólo es responsable de ejecutar los pasos de construcción en un
+    secuencia determinada. Es útil cuando se producen productos de acuerdo con un
+    orden o configuración específica. Estrictamente hablando, la clase Directora es
+    Opcional, ya que el cliente puede controlar a los constructores directamente.
     """
 
     def __init__(self) -> None:
@@ -112,15 +112,15 @@ class Director:
     @builder.setter
     def builder(self, builder: Builder) -> None:
         """
-        The Director works with any builder instance that the client code passes
-        to it. This way, the client code may alter the final type of the newly
-        assembled product.
+        El Director trabaja con cualquier instancia de constructor que pase el código del cliente.
+        lo. De esta manera, el código del cliente puede alterar el tipo final del nuevo
+        producto ensamblado.
         """
         self._builder = builder
 
     """
-    The Director can construct several product variations using the same
-    building steps.
+    El Director puede construir varias variaciones de productos utilizando el mismo
+    pasos de construcción.
     """
 
     def build_minimal_viable_product(self) -> None:
@@ -134,9 +134,9 @@ class Director:
 
 if __name__ == "__main__":
     """
-    The client code creates a builder object, passes it to the director and then
-    initiates the construction process. The end result is retrieved from the
-    builder object.
+    El código del cliente crea un objeto constructor, lo pasa al director y luego
+    inicia el proceso de construcción. El resultado final se obtiene del
+    objeto constructor.
     """
 
     director = Director()
