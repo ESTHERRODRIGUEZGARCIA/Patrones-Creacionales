@@ -30,8 +30,6 @@ class AbstractProductA(ABC):
 class ConcreteProductA1(AbstractProductA):
     def realizar_analisis(self, datos):
         print("Analisis estadistico")
-        #quiero que me recoja los datos del csv y me agrupe los eventos por tipo y contar cuántos hay en cada categoría
-        #y que me devuelva un diccionario con los resultados
 
 class ConcreteProductA2(AbstractProductA):
     def realizar_analisis(self, datos):
@@ -44,7 +42,7 @@ class AbstractProductB(ABC):
 
 class ConcreteProductB1(AbstractProductB):
     def generar_visualizacion(self, datos):
-        print("Histograma")
+        print("Línea de tiempo ordenada")
 
 class ConcreteProductB2(AbstractProductB):
     def generar_visualizacion(self, datos):
@@ -61,4 +59,3 @@ def client_code(factory):
 if __name__ == "__main__":
     client_code(FabricaConcreta1())
     client_code(FabricaConcreta2())
-    print("EJERCICIO 1")
