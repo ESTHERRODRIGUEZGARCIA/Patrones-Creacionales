@@ -12,8 +12,6 @@ class Pizza:
         self.category = None
         self.ingredients = None
     
-    def __str__(self):
-        return f"Nombre: {self.name}, Categoría: {self.category}, Ingredientes: {self.ingredients}"
 
 
 # pizza_builder.py
@@ -47,10 +45,6 @@ class Customer:
         self.presentacion = None
         self.bebida = None
         self.extras = None
-    
-    def __str__(self):
-        return f"Cliente {self.customer_number} - Pizza: Masa: {self.pizza_masa}, Salsa: {self.salsa_base}, Ingredientes: {self.ingredientes}, Técnica: {self.tecnica_coccion}, Presentación: {self.presentacion}, Bebida: {self.bebida}, Extras: {self.extras}"
-
 
 # customer_builder.py
 class CustomerBuilder:
@@ -98,8 +92,6 @@ class CustomerBuilder:
 # main.py
 import time
 import csv
-from builders.pizza_builder import PizzaBuilder
-from builders.customer_builder import CustomerBuilder
 from datos.menu_reader import load_pizza_menu
 from datos.gestion_archivos import save_customer_data
 
