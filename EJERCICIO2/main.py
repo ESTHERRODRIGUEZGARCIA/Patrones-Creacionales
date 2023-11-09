@@ -2,10 +2,8 @@
 # la presentación del menú, 
 # la construcción de pizzas 
 # y la personalización. 
-# SOLID: cada clase o módulo tenga una sola razón para cambia
+# SOLID: cada clase o módulo tenga una sola razón para cambiar.
 
-
-# main.py
 # main.py
 import time
 import csv
@@ -49,14 +47,12 @@ def main():
     print("Cargando menú de pizzas...")
     pizza_menu = load_pizza_menu("EJERCICIO2/datos/pizza_types.csv")
     customer_counter = 0
-    customer_builder = CustomerBuilder()  # Mover la creación del builder fuera del bucle
 
     print("\n¡Bienvenido a Delizioso Pizzeria!\n")
     print("¿Qué deseas hacer?")
     print("1. Elegir una pizza del menú")
     print("2. Personalizar tu pizza")
     print("0. Salir\n")
-
 
     while True:
         choice = input("\nIngresa el número de tu elección: ")
@@ -84,8 +80,7 @@ def main():
         elif choice == "2":
             display_recommendations()  # Mostrar recomendaciones al personalizar la pizza
             customer_counter += 1
-            customer_builder.set_customer_number(customer_counter)
-            print(f"Construyendo pizza para el Cliente {customer_counter}")
+            customer_builder = CustomerBuilder()
 
             customer_builder.set_pizza_masa(input("Tipo de masa (fina o gruesa): "))
             customer_builder.set_salsa_base(input("Salsa base (tomate, soja, genovesa): "))
@@ -128,8 +123,7 @@ def main():
         print("Tu pizza está lista para ser recogida.")
 
         # Guardar los datos del cliente en el archivo CSV
-        customer = customer_builder.get_customer()
-        save_customer_data("EJERCICIO2/datos/datos_clientes.csv", customer)
+        save_customer_data("EJERCICIO2/datos/datos_clientes.csv", pizza_to_serve)
 
 if __name__ == "__main__":
     main()

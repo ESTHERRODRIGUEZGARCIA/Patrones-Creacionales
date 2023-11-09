@@ -1,5 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QListWidget, QInputDialog
+import csv
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QInputDialog
 
 class PizzaApp(QWidget):
     def __init__(self):
@@ -36,7 +37,7 @@ class PizzaApp(QWidget):
         self.layout.addWidget(menu_button)
 
         customize_button = QPushButton('Personalizar tu pizza', self)
-        customize_button.clicked.connect(self.display_recommendations)
+        customize_button.clicked.connect(self.customize_pizza)
         self.layout.addWidget(customize_button)
 
         exit_button = QPushButton('Salir', self)
@@ -52,38 +53,72 @@ class PizzaApp(QWidget):
             pizza_number = int(item.split(".")[0])
             print(f"Has elegido la pizza {pizza_number}: {self.pizza_menu[pizza_number - 1]['name']}")
 
-    def display_recommendations(self):
+    def customize_pizza(self):
         self.customer_counter += 1
         custom_pizza_builder = CustomPizzaBuilder(self.customer_counter)
-        recommendations_label = QLabel(self)
-        recommendations_label.setText(self.get_recommendations_text())
-        custom_pizza_builder.get_pizza_info()
 
-    def get_recommendations_text(self):
-        return (
-            "RECOMENDACIÓN:\n\nTop 5 mejores pizzas servidas por 'Delizioso Pizzeria':\n"
-            "1. Pizza con setas, queso fresco, jamón ibérico, trufa\n"
-            "2. Pizza con ricota, jamón, pesto de cebollino\n"
-            "3. Pizza de verduras (sin tomate), aguacate, jamón ibérico\n"
-            "4. Pizza de berenjena, kale, jamón\n"
-            "5. Pizza de calabaza, queso, jamón\n\n"
-            "En cuanto a vinos:\n"
-            "1. Borsao Joven Selección 2021\n"
-            "2. Marqués de Cáceres Verdejo 2022\n"
-            "3. Viña Zorzal Rosado Garnacha 2022\n\n"
-            "Si prefieres refresco, disponemos de gran variedad."
-        )
+        custom_pizza_builder.set_pizza_masa(self.get_input("Tipo de masa (fina o gruesa): "))
+        custom_pizza_builder.set_salsa_base(self.get_input("Salsa base (tomate, soja, genovesa): "))
+        custom_pizza_builder.set_ingredientes(self.get_input("Ingredientes separados por comas: "))
+        custom_pizza_builder.set_tecnica_coccion(self.get_input("Técnica de cocción (horno de piedra o sartén): "))
+        custom_pizza_builder.set_presentacion(self.get_input("Presentación (en caja de cartón o en un plato de metal): "))
+        custom_pizza_builder.set_bebida(self.get_input("Bebida (vino blanco, vino tinto, cocacola, agua, nada): "))
+        custom_pizza_builder.set_extras(self.get_input("Extras (helado, regalo, patatas fritas): "))
 
+        pizza_to_serve = custom_pizza_builder.build()
+
+        print("\nHas elegido tu pizza con las siguientes indicaciones:")
+        print(pizza_to_serve)
+
+        # Guardar los datos del cliente en el archivo CSV
+        save_customer_data("EJERCICIO2/datos/datos_clientes.csv", pizza_to_serve)
+
+    def get_input(self, label):
+        text, ok_pressed = QInputDialog.getText(self, "Personalizar pizza", label)
+        return text if ok_pressed else ""
+
+def save_customer_data(file_path, pizza_info):
+    try:
+        with open(file_path, 'a', newline='') as csvfile:
+            fieldnames = pizza_info.keys()
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            # Si el archivo está vacío, escribe los encabezados
+            if csvfile.tell() == 0:
+                writer.writeheader()
+
+            writer.writerow(pizza_info)
+    except Exception as e:
+        print(f"Error al guardar datos del cliente: {e}")
 
 class CustomPizzaBuilder:
     def __init__(self, customer_number):
         self.customer_number = customer_number
+        self.pizza_info = {}
 
-    def get_pizza_info(self):
-        print(f"Construyendo pizza para el Cliente {self.customer_number}")
-        # Aquí puedes agregar la lógica para recolectar la información de la pizza personalizada
-        # y guardarla en tu archivo CSV (datos_clientes.csv)
+    def set_pizza_masa(self, masa):
+        self.pizza_info['masa'] = masa
 
+    def set_salsa_base(self, salsa_base):
+        self.pizza_info['salsa_base'] = salsa_base
+
+    def set_ingredientes(self, ingredientes):
+        self.pizza_info['ingredientes'] = ingredientes
+
+    def set_tecnica_coccion(self, tecnica_coccion):
+        self.pizza_info['tecnica_coccion'] = tecnica_coccion
+
+    def set_presentacion(self, presentacion):
+        self.pizza_info['presentacion'] = presentacion
+
+    def set_bebida(self, bebida):
+        self.pizza_info['bebida'] = bebida
+
+    def set_extras(self, extras):
+        self.pizza_info['extras'] = extras
+
+    def build(self):
+        return self.pizza_info
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
