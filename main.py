@@ -5,35 +5,124 @@
 # SOLID: cada clase o módulo tenga una sola razón para cambia
 
 
-import sys
-import os
+
+class Pizza:
+    def __init__(self):
+        self.name = None
+        self.category = None
+        self.ingredients = None
+    
+    def __str__(self):
+        return f"Nombre: {self.name}, Categoría: {self.category}, Ingredientes: {self.ingredients}"
+
+
+# pizza_builder.py
+class PizzaBuilder:
+    def __init__(self):
+        self.pizza = Pizza()
+
+    def set_name(self, name):
+        self.pizza.name = name
+        return self
+
+    def set_category(self, category):
+        self.pizza.category = category
+        return self
+
+    def set_ingredients(self, ingredients):
+        self.pizza.ingredients = ingredients
+        return self
+
+    def build(self):
+        return self.pizza
+
+# customer.py
+class Customer:
+    def __init__(self):
+        self.customer_number = None
+        self.pizza_masa = None
+        self.salsa_base = None
+        self.ingredientes = None
+        self.tecnica_coccion = None
+        self.presentacion = None
+        self.bebida = None
+        self.extras = None
+    
+    def __str__(self):
+        return f"Cliente {self.customer_number} - Pizza: Masa: {self.pizza_masa}, Salsa: {self.salsa_base}, Ingredientes: {self.ingredientes}, Técnica: {self.tecnica_coccion}, Presentación: {self.presentacion}, Bebida: {self.bebida}, Extras: {self.extras}"
+
+
+# customer_builder.py
+class CustomerBuilder:
+    def __init__(self):
+        self.customer = Customer()
+
+    def set_customer_number(self, customer_number):
+        self.customer.customer_number = customer_number
+        return self
+
+    def set_pizza_masa(self, masa):
+        self.customer.pizza_masa = masa
+        return self
+
+    def set_salsa_base(self, salsa_base):
+        self.customer.salsa_base = salsa_base
+        return self
+
+    def set_ingredientes(self, ingredientes):
+        self.customer.ingredientes = ingredientes
+        return self
+
+    def set_tecnica_coccion(self, tecnica_coccion):
+        self.customer.tecnica_coccion = tecnica_coccion
+        return self
+
+    def set_presentacion(self, presentacion):
+        self.customer.presentacion = presentacion
+        return self
+
+    def set_bebida(self, bebida):
+        self.customer.bebida = bebida
+        return self
+
+    def set_extras(self, extras):
+        self.customer.extras = extras
+        return self
+
+    def build(self):
+        return self.customer
+
+
+
+
+# main.py
 import time
 import csv
 from builders.pizza_builder import PizzaBuilder
 from builders.customer_builder import CustomerBuilder
-from models.pizza import Pizza
-from models.customer import Customer
 from datos.menu_reader import load_pizza_menu
 from datos.gestion_archivos import save_customer_data
 
 def display_pizza_menu(menu):
     print("Menú de pizzas:")
     for i, pizza in enumerate(menu, 1):
-        print(f"{i}. {pizza.name} - {pizza.category}")
-    print("0. Salir")
+        print(f"{i}. {pizza}")
 
-# Obtener la ruta del directorio actual
-current_directory = os.path.dirname(os.path.abspath(__file__))
-
-# Agregar el directorio raíz a sys.path
-sys.path.append(current_directory)
+def get_selected_pizza_info(menu, choice):
+    try:
+        index = int(choice) - 1
+        if 0 <= index < len(menu):
+            selected_pizza = menu[index]
+            print(f"Nombre: {selected_pizza}")
+        else:
+            print("Selección no válida.")
+    except ValueError:
+        print("Por favor, ingresa un número válido.")
 
 def main():
-    # Cargar el menú de pizzas desde el archivo CSV
-    menu = load_pizza_menu("pizza_types.csv")
-
-    # Contador de clientes
+    pizza_menu = load_pizza_menu("EJERCICIO2/datos/pizza_types.csv")
     customer_counter = 0
+    customer_builder = CustomerBuilder()  # Mover la creación del builder fuera del bucle
 
     while True:
         print("¡Bienvenido a Delizioso Pizzeria!")
@@ -45,35 +134,33 @@ def main():
         choice = input("Ingresa el número de tu elección: ")
 
         if choice == "1":
-            display_pizza_menu(menu)
+            display_pizza_menu(pizza_menu)
             pizza_choice = input("Elige el número de la pizza que deseas: ")
-
+            
             if pizza_choice == "0":
                 print("Gracias por visitar Delizioso Pizzeria. ¡Hasta la próxima!")
                 break
 
-            if not pizza_choice.isnumeric() or int(pizza_choice) < 1 or int(pizza_choice) > len(menu):
+            if not pizza_choice.isnumeric() or int(pizza_choice) < 1 or int(pizza_choice) > len(pizza_menu):
                 print("Selección no válida. Inténtalo de nuevo.")
                 continue
 
+            # Mostrar detalles de la pizza seleccionada
+            get_selected_pizza_info(pizza_menu, pizza_choice)
+
             # Construir la pizza elegida del menú
-            pizza = menu[int(pizza_choice) - 1]
             pizza_builder = PizzaBuilder()
-            pizza_builder.set_name(pizza.name)
-            pizza_builder.set_category(pizza.category)
-            pizza_builder.set_ingredients(pizza.ingredients)
+            pizza_builder.set_name(pizza_menu[int(pizza_choice) - 1])
             pizza_to_serve = pizza_builder.build()
 
         elif choice == "2":
-            # Construir una pizza personalizada
             customer_counter += 1
-            customer_builder = CustomerBuilder()
             customer_builder.set_customer_number(customer_counter)
             print(f"Construyendo pizza para el Cliente {customer_counter}")
 
             customer_builder.set_pizza_masa(input("Tipo de masa (fina o gruesa): "))
             customer_builder.set_salsa_base(input("Salsa base (tomate, soja, genovesa): "))
-            customer_builder.set_ingredientes(input("Ingredientes separados por comas (queso, pollo, bacon, atún, cebolla): "))
+            customer_builder.set_ingredientes(input("Ingredientes separados por comas: "))
             customer_builder.set_tecnica_coccion(input("Técnica de cocción (horno de piedra o sartén): "))
             customer_builder.set_presentacion(input("Presentación (en caja de cartón o en un plato de metal): "))
             customer_builder.set_bebida(input("Bebida (vino blanco, vino tinto, cocacola, agua, nada): "))
@@ -94,8 +181,7 @@ def main():
 
         # Guardar los datos del cliente en el archivo CSV
         customer = customer_builder.get_customer()
-        save_customer_data("datos_clientes.csv", customer)
+        save_customer_data("EJERCICIO2/datos/datos_clientes.csv", customer)
 
 if __name__ == "__main__":
     main()
-
