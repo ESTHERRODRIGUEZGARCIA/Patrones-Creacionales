@@ -1,7 +1,6 @@
 #funciones para manejar la lectura y escritura de datos de clientes en un archivo CSV llamado "datos_clientes.csv".
 
 import csv
-import csv
 from pizza_customer import Pizza
 
 
