@@ -1,4 +1,8 @@
 # Patrones-Creacionales
+Click [aquí](https://github.com/ESTHERRODRIGUEZGARCIA/Patrones-Creacionales.git) para ver el enlace del repositorio.
+
+Trabajo hecho por:
+1. [Esther Rodríguez García](https://github.com/ESTHERRODRIGUEZGARCIA)
 
 ## Ejercicio 1: Análisis Modular de las Activaciones del SAMUR-Protección Civil en Madrid con Abstract Factory
 
