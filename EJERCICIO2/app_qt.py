@@ -32,6 +32,22 @@ class PizzaApp(QWidget):
         self.label = QLabel('¡Bienvenido a Delizioso Pizzeria!', self)
         self.layout.addWidget(self.label)
 
+        recommendations_label = QLabel(
+            "\nRECOMENDACIÓN:\n\nTop 5 mejores pizzas servidas por 'Delizioso Pizzeria':\n"
+            "1. Pizza con setas, queso fresco, jamón ibérico, trufa\n"
+            "2. Pizza con ricota, jamón, pesto de cebollino\n"
+            "3. Pizza de verduras (sin tomate), aguacate, jamón ibérico\n"
+            "4. Pizza de berenjena, kale, jamón\n"
+            "5. Pizza de calabaza, queso, jamón\n\n"
+            "En cuanto a vinos:\n"
+            "1. Borsao Joven Selección 2021\n"
+            "2. Marqués de Cáceres Verdejo 2022\n"
+            "3. Viña Zorzal Rosado Garnacha 2022\n\n"
+            "Si prefieres refresco, disponemos de gran variedad.",
+            self
+        )
+        self.layout.addWidget(recommendations_label)
+
         menu_button = QPushButton('Elegir una pizza del menú', self)
         menu_button.clicked.connect(self.display_pizza_menu)
         self.layout.addWidget(menu_button)
