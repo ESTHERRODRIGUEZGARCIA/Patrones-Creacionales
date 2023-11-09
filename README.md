@@ -1,5 +1,24 @@
 # Patrones-Creacionales
 
+EJERCICIO2/
+  - main.py
+  - builders/
+    - __init__.py
+    - pizza_builder.py
+    - customer_builder.py
+  - datos/
+    - __init__.py
+    - menu_reader.py
+    - gestion_archivos.py
+    - pizza_types.csv
+  - models/
+    - __init__.py
+    - customer.py
+    - pizza.py
+
+
+
+
 ## Ejercicio 1: Análisis Modular de las Activaciones del SAMUR-Protección Civil en Madrid con Abstract Factory
 
 Contexto:
