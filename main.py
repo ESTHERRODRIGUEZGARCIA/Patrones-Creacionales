@@ -5,95 +5,11 @@
 # SOLID: cada clase o módulo tenga una sola razón para cambia
 
 
-
-class Pizza:
-    def __init__(self):
-        self.name = None
-        self.category = None
-        self.ingredients = None
-    
-
-
-# pizza_builder.py
-class PizzaBuilder:
-    def __init__(self):
-        self.pizza = Pizza()
-
-    def set_name(self, name):
-        self.pizza.name = name
-        return self
-
-    def set_category(self, category):
-        self.pizza.category = category
-        return self
-
-    def set_ingredients(self, ingredients):
-        self.pizza.ingredients = ingredients
-        return self
-
-    def build(self):
-        return self.pizza
-
-# customer.py
-class Customer:
-    def __init__(self):
-        self.customer_number = None
-        self.pizza_masa = None
-        self.salsa_base = None
-        self.ingredientes = None
-        self.tecnica_coccion = None
-        self.presentacion = None
-        self.bebida = None
-        self.extras = None
-
-# customer_builder.py
-class CustomerBuilder:
-    def __init__(self):
-        self.customer = Customer()
-
-    def set_customer_number(self, customer_number):
-        self.customer.customer_number = customer_number
-        return self
-
-    def set_pizza_masa(self, masa):
-        self.customer.pizza_masa = masa
-        return self
-
-    def set_salsa_base(self, salsa_base):
-        self.customer.salsa_base = salsa_base
-        return self
-
-    def set_ingredientes(self, ingredientes):
-        self.customer.ingredientes = ingredientes
-        return self
-
-    def set_tecnica_coccion(self, tecnica_coccion):
-        self.customer.tecnica_coccion = tecnica_coccion
-        return self
-
-    def set_presentacion(self, presentacion):
-        self.customer.presentacion = presentacion
-        return self
-
-    def set_bebida(self, bebida):
-        self.customer.bebida = bebida
-        return self
-
-    def set_extras(self, extras):
-        self.customer.extras = extras
-        return self
-
-    def build(self):
-        return self.customer
-
-
-
-
 # main.py
 import time
 import csv
-from datos.menu_reader import load_pizza_menu
-from datos.gestion_archivos import save_customer_data
+from datos import *
+from builder import PizzaBuilder, CustomerBuilder
 
 def display_pizza_menu(menu):
     print("Menú de pizzas:")
