@@ -4,17 +4,16 @@
 import csv
 from models.pizza import Pizza
 
+
 def load_pizza_menu(filename):
     menu = []
     try:
         with open(filename, mode='r', newline='') as file:
             reader = csv.DictReader(file)
-            for row in reader:
-                pizza = Pizza()
-                pizza.name = row['name']
-                pizza.category = row['category']
-                pizza.ingredients = row['ingredients']
-                menu.append(pizza)
+            for i, row in enumerate(reader, 1):
+                pizza_name = row['name']
+                print(f"{i}. {pizza_name}")
+                menu.append(pizza_name)
     except Exception as e:
         print(f"Error al cargar el menú de pizzas: {str(e)}")
     return menu

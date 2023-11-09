@@ -1,3 +1,10 @@
+# main.py
+import time
+import csv
+
+from datos.menu_reader import load_pizza_menu
+from datos.gestion_archivos import save_customer_data
+
 # pizza.py
 class Pizza:
     def __init__(self):
@@ -80,34 +87,16 @@ class CustomerBuilder:
 
 
 
-# main.py
-import time
-import csv
-from builders.pizza_builder import PizzaBuilder
-from builders.customer_builder import CustomerBuilder
-from datos.menu_reader import load_pizza_menu
-from datos.gestion_archivos import save_customer_data
 
 def display_pizza_menu(menu):
     print("Menú de pizzas:")
     for i, pizza in enumerate(menu, 1):
-        print(f"{i}. {pizza}")
-
-def get_selected_pizza_info(menu, choice):
-    try:
-        index = int(choice) - 1
-        if 0 <= index < len(menu):
-            selected_pizza = menu[index]
-            print(f"Nombre: {selected_pizza}")
-        else:
-            print("Selección no válida.")
-    except ValueError:
-        print("Por favor, ingresa un número válido.")
+        print(f"{i}. {pizza.name} - {pizza.category}")
+    print("0. Salir")
 
 def main():
-    pizza_menu = load_pizza_menu("EJERCICIO2/datos/pizza_types.csv")
+    # Contador de clientes
     customer_counter = 0
-    customer_builder = CustomerBuilder()  # Mover la creación del builder fuera del bucle
 
     while True:
         print("¡Bienvenido a Delizioso Pizzeria!")
@@ -119,33 +108,37 @@ def main():
         choice = input("Ingresa el número de tu elección: ")
 
         if choice == "1":
-            display_pizza_menu(pizza_menu)
+            # Cargar el menú de pizzas desde el archivo CSV
+            menu = load_pizza_menu("pizza_types.csv")
+            display_pizza_menu(menu)
             pizza_choice = input("Elige el número de la pizza que deseas: ")
-            
+
             if pizza_choice == "0":
                 print("Gracias por visitar Delizioso Pizzeria. ¡Hasta la próxima!")
                 break
 
-            if not pizza_choice.isnumeric() or int(pizza_choice) < 1 or int(pizza_choice) > len(pizza_menu):
+            if not pizza_choice.isnumeric() or int(pizza_choice) < 1 or int(pizza_choice) > len(menu):
                 print("Selección no válida. Inténtalo de nuevo.")
                 continue
 
-            # Mostrar detalles de la pizza seleccionada
-            get_selected_pizza_info(pizza_menu, pizza_choice)
-
             # Construir la pizza elegida del menú
+            pizza = menu[int(pizza_choice) - 1]
             pizza_builder = PizzaBuilder()
-            pizza_builder.set_name(pizza_menu[int(pizza_choice) - 1])
+            pizza_builder.set_name(pizza.name)
+            pizza_builder.set_category(pizza.category)
+            pizza_builder.set_ingredients(pizza.ingredients)
             pizza_to_serve = pizza_builder.build()
 
         elif choice == "2":
+            # Construir una pizza personalizada
             customer_counter += 1
+            customer_builder = CustomerBuilder()
             customer_builder.set_customer_number(customer_counter)
             print(f"Construyendo pizza para el Cliente {customer_counter}")
 
             customer_builder.set_pizza_masa(input("Tipo de masa (fina o gruesa): "))
             customer_builder.set_salsa_base(input("Salsa base (tomate, soja, genovesa): "))
-            customer_builder.set_ingredientes(input("Ingredientes separados por comas: "))
+            customer_builder.set_ingredientes(input("Ingredientes separados por comas (queso, pollo, bacon, atún, cebolla): "))
             customer_builder.set_tecnica_coccion(input("Técnica de cocción (horno de piedra o sartén): "))
             customer_builder.set_presentacion(input("Presentación (en caja de cartón o en un plato de metal): "))
             customer_builder.set_bebida(input("Bebida (vino blanco, vino tinto, cocacola, agua, nada): "))
@@ -166,7 +159,7 @@ def main():
 
         # Guardar los datos del cliente en el archivo CSV
         customer = customer_builder.get_customer()
-        save_customer_data("EJERCICIO2/datos/datos_clientes.csv", customer)
+        save_customer_data("datos_clientes.csv", customer)
 
 if __name__ == "__main__":
     main()
